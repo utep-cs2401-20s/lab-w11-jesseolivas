@@ -53,10 +53,6 @@ public class newSorting {
         // Partition the array.
         // Value j is the location of last element in low partition.
         int j = Partition(numbers, i , k);
-        for(int index = 0; index < numbers.length; index++){
-            System.out.print(numbers[index] + " ");
-        }
-        System.out.println("");
 
         // Recursively sort low and high partitions
         Quicksort(numbers, i, j-1);
