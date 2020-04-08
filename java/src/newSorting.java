@@ -31,18 +31,31 @@ public class newSorting {
 
     public static void mergeSortedHalves(int[] a, int[] l, int[] r){
 
-        // iterators for the left and right arrays
+        // iterators for the left and right arrays and main array
         int liter = 0;
         int riter = 0;
+        int i = 0;
 
         // populating the a array
-        for(int i = 0; i < a.length; i++){
+        while(i < a.length){
+
+            // Conditional for lower element and out of bounds check
+            if(liter != l.length && l[liter] < r[riter]){
+                a[i] = l[liter];
+                liter++;
+                i++;
+            }
+
+            // Conditional for lower element and out of bounds check
+            if(riter != r.length && r[riter] < l[liter]){
+                a[i] = r[riter];
+                riter++;
+                i++;
+            }
 
         }
 
     }
-
-
 
     public static void Quicksort(int[] numbers, int i, int k){
         // Base case: if one or zero elements, partition is already sorted
