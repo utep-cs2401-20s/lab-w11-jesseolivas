@@ -1,26 +1,27 @@
+
 public class newSorting {
     int [] a = {1,2,3,4,5};
     int size = 4;
 
     public static void newSorting(int [] arr, int size){
        // base case
-        if(arr.length < size || arr.length == size){
-            Quicksort(arr, 0 ,arr.length);
+        if(arr.length <= size){
+            Quicksort(arr, 0 ,arr.length-1);
         }
         else{
 
             // 1. Sort the left half and recursively call newSorting on it
             int mid = arr.length/2;
-            int [] left = new int [mid];
+            int [] left = new int [(arr.length+1)/2];
             for (int i = 0; i < left.length; i++){
                 left[i] = arr[i];
             }
             newSorting(left, size);
 
             // 2. Sort the left half and recursively call newSorting on it
-            int [] right = new int [arr.length-mid];
-            for (int i = (mid/2)+1; i < right.length; i++){
-                right[i] = arr[i];
+            int [] right = new int [arr.length-left.length];
+            for (int i = 0; i < right.length; i++){
+                right[i] = arr[i+ left.length];
             }
             newSorting(right,size);
 
@@ -36,27 +37,37 @@ public class newSorting {
         int riter = 0;
         int i = 0;
 
-        // populating the a array
-        while(i < a.length){
+        // populating the a array with out of bounds conditional
+        while(i < a.length && liter < l.length && riter < r.length){
 
-            // Conditional for lower element and out of bounds check
-            if(liter != l.length && l[liter] < r[riter]){
+            // Conditional for lower element
+            if(l[liter] < r[riter]){
                 a[i] = l[liter];
                 liter++;
                 i++;
             }
 
-            // Conditional for lower element and out of bounds check
-            if(riter != r.length && r[riter] < l[liter]){
+            // Conditional for lower element
+            else{
                 a[i] = r[riter];
                 riter++;
                 i++;
             }
-
         }
 
+        while(liter < l.length){
+            a[i] = l[liter];
+            liter++;
+            i++;
+        }
+        while(riter < r.length){
+            a[i] = r[riter];
+            riter++;
+            i++;
+        }
     }
 
+    // Helper method for newSorting method, necessary for base case
     public static void Quicksort(int[] numbers, int i, int k){
         // Base case: if one or zero elements, partition is already sorted
         if(i >= k){
@@ -71,6 +82,8 @@ public class newSorting {
         Quicksort(numbers, i, j-1);
         Quicksort(numbers, j+1, k);
     }
+
+    // Helper method part of quicksort
     public static int Partition(int[] numbers,int low,int high){
         int pivot = numbers[high];
         int i = (low-1); // index of smaller element
@@ -93,4 +106,6 @@ public class newSorting {
         return i+1;
     }
 }
+
+
 
